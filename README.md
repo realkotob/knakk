@@ -105,17 +105,27 @@ There are a couple good usage examples of coroutines:
 - [`Card.gd`](GameScreen/Card/Card.gd) uses coroutines to wait for tweens to finish
 - [`MenuScreen.gd`](MenuScreen/MenuScreen.gd), [`Tutorial.gd`](GameScreen/Tutorial.gd) and [`NewRoundAnimation.gd`](GameScreen/NewRoundAnimation.gd) use coroutines to wait for a specified amount of time before doing something
 
-## 🎯 Tasks Left for the Reader
+## 🎯 Not Implemented Yet
 
-- Implement a landscape layout: Use Godot's UI features to make the controls automatically resize and reflow depending on different window aspect ratios.
-- Implement a highscore system: Use the filesystem abstraction to save, load and show highscores of previous games.
+- A landscape layout: Use Godot's UI features to make the controls automatically resize and reflow depending on different window aspect ratios.
+- A highscore system: Use the filesystem abstraction to save, load and show highscores of previous games.
+
+## Releasing a new version
+
+1. Add an entry to `CHANGELOG.md`.
+1. Use `just tag-version $VERSION` to write the new version into the export preset configuration.
+1. Verify that the build works by running `just export`.
+1. Create a new commit: `git commit -m "Version $VERSION"`.
+1. Use `git tag $VERSION` to tag that commit with the new version.
+1. Use `git push --tags` to push the changes (including your new tag) to export and release the new version via CI.
+1. Upload the `.aab` release to the Google Play Store manually.
 
 ## FAQ
 
 ### Why Is the Release Keystore Checked into the Repo?
 
-This repository uses [git-crypt](https://github.com/AGWA/git-crypt) to encrypt both the keystore and the `export_presets.cfg` file. This way, the file contents remain private. 
-**Do not add your release keystore or export_presets.cfg file to your git repository** without encrypting or adding them to your .gitignore!
+This repository uses [git-crypt](https://github.com/AGWA/git-crypt) to encrypt both the keystore and the `.godot/export_credentials.cfg` file. This way, the file contents remain private. 
+**Do not add your release keystore or export_credentials.cfg file to your git repository** without encrypting or adding them to your .gitignore!
 
 ### What Is the Status of the Project?
 
